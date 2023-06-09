@@ -3,6 +3,7 @@ from pydantic import BaseModel
 from ml_service.ml_model import MlModel
 app = FastAPI()
 
+
 class Transaction(BaseModel):
     amount: float
     oldbalanceOrg: float
@@ -33,4 +34,5 @@ class Transaction(BaseModel):
 
 @app.post('/fraud_check_this_transaction/')
 def check_fraud(transaction: Transaction):
-    return {"verdict": 'fraud', "verdict_proba": 0.9}
+    print(transaction.dict())
+    return MlModel().predict(transaction = transaction.dict())
