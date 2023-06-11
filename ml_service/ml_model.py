@@ -23,8 +23,3 @@ class MlModel:
             
             "verdict_proba": self.decision_tree_model.predict_proba(transaction)
         }
-
-
-
-        
-        
