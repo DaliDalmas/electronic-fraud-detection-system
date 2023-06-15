@@ -1,35 +1,25 @@
-import os
-import sys
 from logging.config import fileConfig
 
-from alembic import context
-from dotenv import load_dotenv
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-load_dotenv(os.path.join(BASE_DIR, ".env"))
-sys.path.append(BASE_DIR)
+from alembic import context
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
-
 config = context.config
-
-config.set_main_option("sqlalchemy.url", "sqlite:///database.sqlite")
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
-fileConfig(config.config_file_name)
+if config.config_file_name is not None:
+    fileConfig(config.config_file_name)
 
 # add your model's MetaData object here
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-import models
-
-target_metadata = models.Base.metadata
-
+from models import Base
+target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
@@ -54,7 +44,6 @@ def run_migrations_offline():
         url=url,
         target_metadata=target_metadata,
         literal_binds=True,
-        render_as_batch=True,
         dialect_opts={"paramstyle": "named"},
     )
 
