@@ -7,3 +7,9 @@ Data used to build the machine learning model and used for analysis is gotten fr
 The same dataset is uploaded here. https://www.kaggle.com/datasets/rupakroy/online-payments-fraud-detection-dataset
 
 engine_service signin and signup api code gotten from https://github.com/bwithai/jwt-sign_in-sign_up-fastapi/tree/main
+
+alembic commands
+
+alembic init alembic
+alembic revision --autogenerate -m "first revision”
+alembic upgrade head
